@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>رسالة لـ Nada ❤️</title>
+<style>
+body{margin:0;padding:0;font-family:Arial;text-align:center;overflow:hidden;}
+#overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,#ff4d6d,#3a1c71,#ffaf7b);background-size:600% 600%;animation:gradientBG 10s ease infinite;z-index:-1;}
+@keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+#gift{font-size:90px;cursor:pointer;margin-top:70px;color:#fff;}
+#intro{font-size:22px;color:#fff;}
+#content,#secondPage{display:none;color:#fff;}
+h1{margin-top:30px;color:#ffdfdf;text-shadow:1px 1px 5px #000;}
+img{width:240px;height:240px;border-radius:20px;margin:20px;border:4px solid #ff4d6d;box-shadow:0 0 20px #ff4d6d;}
+button{padding:14px 30px;font-size:18px;border:none;border-radius:12px;margin:10px;cursor:pointer;transition:0.3s;}
+#yes{background:#28a745;color:white;}
+#no{background:#dc3545;color:white;position:absolute;}
+.heart{position:absolute;animation:float 6s linear infinite;}
+@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
+</style>
+</head>
+<body>
+
+<div id="overlay"></div>
+
+<div id="gift" onclick="openGift()">🎁</div>
+<p id="intro">اضغطي على الهديّة يا Nada ❤️</p>
+
+<div id="content">
+  <h1>إلى Nada ❤️</h1>
+  <div id="message"></div>
+  <div id="loveQuestion" style="display:none">
+    <p>هل بتحبيني؟ 😏</p>
+    <button id="yes" onclick="showSecondPage()">آه ❤️</button>
+    <button id="no" onmouseover="moveButton()">لا 😅</button>
+  </div>
+</div>
+
+<div id="secondPage" style="display:none">
+  <h1>حبيبي ❤️</h1>
+  <img src="https://i.postimg.cc/9QmCrPTQ/b2f93212_e910_4d88_add1_b7e55c27efd1.jpg" alt="صورتنا الثانية">
+  <button onclick="showSecret()">لو عايزه تعرفي السر اضغطي هنا!</button>
+  <div id="daysCounter" style="margin-top:20px;font-size:20px;"></div>
+</div>
+
+<script>
+// ✨ Open first gift
+function openGift(){
+  document.getElementById("gift").style.display="none";
+  document.getElementById("intro").style.display="none";
+  document.getElementById("content").style.display="block";
+  typeWriter("message","يا Nada… كل سنة وإنتي طيبة وعيد سعيد ❤️",40,function(){
+    document.getElementById("loveQuestion").style.display="block";
+  });
+}
+
+// 💌 Typing effect
+function typeWriter(id,msg,speed,callback){
+  let element = document.getElementById(id);
+  element.innerHTML = "";
+  let index = 0;
+  function typing(){
+    if(index < msg.length){
+      element.innerHTML += msg.charAt(index);
+      index++;
+      setTimeout(typing,speed);
+    } else if(callback){ callback(); }
+  }
+  typing();
+}
+
+// 🪄 Move "No" button
+function moveButton(){
+  let btn=document.getElementById("no");
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+}
+
+// 📸 Show second page
+function showSecondPage(){
+  document.getElementById("content").style.display="none";
+  document.getElementById("secondPage").style.display="block";
+}
+
+// ⏳ Show secret days counter
+function showSecret(){
+  let startDate=new Date("2022-08-20");
+  let today=new Date();
+  let diff=today-startDate;
+  let days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("daysCounter").innerHTML="بقالنا "+days+" يوم مع بعض ❤️";
+  createHearts();
+}
+
+// 🧡 Floating hearts
+function createHearts(){
+  for(let i=0;i<60;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(12+Math.random()*20)+"px";
+    heart.style.animationDuration=(4+Math.random()*6)+"s";
+    document.body.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
